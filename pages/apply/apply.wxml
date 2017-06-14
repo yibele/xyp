@@ -1,0 +1,18 @@
+
+<view class="apply">
+  <view class="gongxi">
+  <text>您已报名，请准时出席</text>
+  <view class="spacing"></view>
+  </view>
+  <view class="apply_bac">
+    <view class="_time">距离活动还有</view>
+    <view class='_timer'>
+      <block class='t_H'>{{hour}}</block>
+      <block class='t_m'>{{min}}</block>
+      <block class='t_s'>{{s}}</block>
+      <view class="detail">
+        <button type="default" size="mini" bindtap="toDetailPage">查看活动详情</button>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,33 @@
+<view class="container">
+  <view class="header">
+    <view class="userInfo">
+      <image class="userHead" src="{{avatarUrl}}"></image>
+      <view class="userName">{{nickName}}</view>
+    </view>
+  </view>
+  <view class="content">
+    <view class="now">
+      正在进行
+    </view>
+    <view class="fengexian"></view>
+    <view class="now_act">
+      <view class="now_act_list" wx:for="{{act_img}}">
+        <image src="{{item}}" mode="widthFix"></image>
+        <view class="now_act_content">
+          <text>活动名称： 798文化广场活动\n</text>
+          <text>活动时间:  2017-7-20 </text>
+          <text>活动人数 :  20人</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="spacing"></view>
+  <view class="content">
+    <view class="now">
+      已经完成
+    </view>
+    <view class="fengexian"></view>
+    <view class="ago_act"></view>
+
+  </view>
+</view>

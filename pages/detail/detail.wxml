@@ -1,0 +1,33 @@
+<!--pages/detail/detail.wxml-->
+<view class="container">
+  <view class="header">
+    <image src="{{act.act_img}}" mode="widthFix"></image>
+    <view class="actDetail">
+      <view class="act_l">活动时间\n</view>
+      <view>{{act.act_time}}\n</view>
+      <view class="fengexian"></view>
+      <view class="act_l">活动地点\n</view>
+      <view>{{act.act_location}}\n</view>
+      <view class="fengexian"></view>
+      <view class="act_l">活动参与\n</view>
+      <view>活动报名{{act.act_enough_user}}人 /还需 :{{leftNum}} \n</view>
+    </view>
+    <view class="body">
+      <view class="comment">
+        <text class="act_title">活动介绍\n</text>
+        <view class="spacing"></view>
+        <text class="act_content">{{act.act_content}}</text>
+      </view>
+      <view class="spacing"></view>
+      <view class="comment">
+        <text class="act_title">活动规则\n</text>
+        <view class="spacing"></view>
+        <text class="act_content">{{act.act_rule}}</text>
+        <view class="spacing"></view>
+      </view>
+    </view>
+  </view>
+  <view class="_bottom">
+  <button  type="primary" bindtap="toApply">马上报名</button>
+  </view>
+</view>

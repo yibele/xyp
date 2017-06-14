@@ -1,0 +1,30 @@
+
+<view class="container">
+  <view class="header">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item bindtap="toDetailPage" data-id="{{item.id}}">
+          <image src="{{item.data}}" class="slide-image" mode="widthFix" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <view class="content">
+    <view class="title" data-test="hha" id='name' bindtap="tapName">
+      即将完成
+    </view>
+    <view class="box1">
+      <view wx:for="{{remen_img}}" class="box2">
+        <image src="{{item}}" mode="widthFix" bindtap="toDetailPage" data-id="{{item.id}}"></image>
+      </view>
+    </view>
+  </view>
+  <view class="content">
+    <view class="title">最新派对</view>
+    <view wx:for="{{activity_img}}" bindtap="toDetailPage" class="activity" style="margin-left:20rpx;margin-right:20rpx;">
+      <image src="{{item}}"></image>
+    </view>
+  </view>
+  <view class="tuijian"></view>
+</view>

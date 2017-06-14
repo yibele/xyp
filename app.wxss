@@ -1,0 +1,27 @@
+.container {
+  color: 666666;
+  background:#e6e6e6;
+  padding-bottom: 20rpx;
+}
+
+button {
+  border-radius: 0;
+}
+button[type="primary"] {
+color:#FFFFFF;
+background-color:#52bc89;
+}
+.fengexian {
+  height: 2rpx;
+  width: 100%;
+  background-color: #e5e5e5;
+  margin-top:20rpx;
+  margin-bottom: 20rpx;
+}
+.spacing {
+  height: 20rpx;
+  width:100%;
+}
+swiper {
+  height: 360rpx;
+}

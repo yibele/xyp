@@ -1,0 +1,47 @@
+/* pages/apply/apply.wxss */
+.apply {
+  padding: 20rpx;
+}
+.gongxi {
+  padding: 40rpx;
+  text-align: center;
+  font-size:40rpx;
+}
+.apply_bac{
+  width: 90%;
+  height: 500rpx;
+  background:#52bc89;
+
+  border-radius: 6rpx;
+  opacity: 0.8;
+  padding: 34rpx;
+}
+.container {
+  padding-top: 200rpx;
+  background:#fff;
+}
+._time {
+  font-size: 24rpx;
+  color: #fff;
+}
+._timer {
+  margin: 60rpx;
+  width: 80%;
+  height: 300rpx;
+  padding-top:30rpx;
+  padding-left: 46rpx;
+  font-size: 84rpx;
+  color:#fff;
+  letter-spacing: 10rpx;
+}
+._timer button[type="default"] {
+  margin-top:20rpx;
+  color: #fff;
+  border: 4rpx #fff solid;
+  border-radius: 6rpx;
+  background-color:rgba(0,0,0,0.0);
+  font-size: 30rpx;
+}
+._timer .detail {
+  padding-left: 26rpx;
+}

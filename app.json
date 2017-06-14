@@ -1,0 +1,41 @@
+{
+  "pages": [
+        "pages/user/user",
+    "pages/index/index",
+    "pages/apply/apply",
+    "pages/detail/detail",
+    "pages/act/act"
+
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#52bc89",
+    "navigationBarTitleText": "校园 π",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#fff"
+  },
+  "tabBar": {
+    "color": "#808080",
+    "selectedColor": "#0bc8dd",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "发现精彩",
+        "iconPath": "images/find_hei.png",
+        "selectedIconPath": "images/find.png"
+      },
+      {
+        "pagePath": "pages/act/act",
+        "text": "更多活动",
+        "iconPath": "images/list_hei.png",
+        "selectedIconPath": "images/list.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "images/user_hei.png",
+        "selectedIconPath": "images/user.png"
+      }
+    ]
+  }
+}

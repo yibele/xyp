@@ -1,0 +1,58 @@
+.header {
+
+}
+.slide-image{
+  width:100%;
+}
+.search {
+  text-align: center;
+  font-size: 28rpx;
+  background-color: #fff;
+  border: 5rpx #e8e7e7 solid;
+  border-radius: 15rpx;
+}
+.content {
+  margin-top:20rpx;
+  background:#fff;
+  padding-top: 20rpx;
+  padding-bottom: 10rpx;
+}
+.box1 {
+  display:flex;
+  -moz-box-pack: justify;
+  -moz-box-align: justify;
+  justify-content:center; 
+}
+.box2 {
+  color: white;
+  position: relative;
+  width: 30%;
+  margin: 0 10rpx;
+}
+.title {
+  padding-left: 20rpx;
+  padding-bottom: 20rpx;
+  font-size: 10pt;
+  color: #4F4F2F;
+}
+
+.box2 image{
+  width: 100%;
+}
+.box2 .mask {
+  position: absolute;
+  top:0;
+  left: 0;
+  width:100%;
+  height: 98%;
+  background: black;
+  opacity: 0.3;
+}
+
+.activity {
+  overflow: hidden;
+}
+.activity image {
+  width: 100%;
+  height: 250rpx;
+}

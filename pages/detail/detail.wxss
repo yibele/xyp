@@ -1,0 +1,52 @@
+/* pages/detail/detail.wxss */
+.header image {
+  width: 100%;
+}
+
+.actDetail {
+  font-size: 30rpx;
+  color: #333333;
+  position: absolute;
+  top:880rpx;
+  left: 30rpx;
+  width: 86%;
+  background: #fff;
+  z-index: 1;
+  border: 2rpx #fff solid;
+  border-radius: 10rpx;
+  box-shadow: 0rpx 0rpx 10rpx black;
+  padding: 20rpx;
+}
+.actDetail .act_l{
+  margin-bottom: 10rpx;
+}
+.body {
+  padding-top : 300rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  margin-bottom: 80rpx;
+}
+.comment {
+  margin-bottom: 20rpx;
+}
+.act_title {
+  font-size:16px;
+  font-weight: bold;
+}
+
+.act_content {
+  font-size: 26rpx;
+}
+._bottom {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 2;
+}
+._bottom button {
+  font-size: 36rpx;
+  padding-top:5rpx;
+  padding-bottom: 5rpx;
+}
+
