@@ -11,7 +11,7 @@
   </view>
 
   <view class="content">
-    <view class="title" data-test="hha" id='name' bindtap="tapName">
+    <view class="title"  id='name' bindtap="tapName">
       即将完成
     </view>
     <view class="box1">

@@ -1,4 +1,5 @@
 // pages/detail/apply.js
+var app = getApp();
 Page({
 
   /**
@@ -12,33 +13,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var data = {
-      "Id": 9,
-      "ac_user": "yibu",
-      "act_title": "狼人杀",
-      "act_img": "http://172.19.208.253/huwaihuodong.jpg",
-      "act_content": "6月15号进行狼人杀活动 在512 教室",
-      "act_location": "北二 512 教室",
-      "act_wechat": "yibugele",
-      "act_type": "多人桌游",
-      "act_rule": "想参加的同学在6月15号准时到513教室。",
-      "act_review": 0,
-      "act_have_done": 0,
-      "act_user_need": 12,
-      "act_enough_user": 7,
-      "act_time": "2017-6-15 19:00:00"
-    };
-    wx.request({
-      url: 'http://localhost:8888/api/activity',
-      method:"GET",
-      dataType:"json",
-      success:function(data){
-        console.log(data);
-      }
-    })
-    this.setData({
-      act: data
-    })
+    this.getCacheActDetail(this, options.id,'actInfo');
   },
 
   /**
@@ -96,6 +71,47 @@ Page({
   toApply: function (event) {
     wx.navigateTo({
       url: '/pages/apply/apply',
+    })
+  }
+  ,
+
+  /**
+   * 获取活动详细信息
+   */
+  getActDetail : function (id) {
+    var that = this;
+    wx.request({
+      url: 'http://localhost/api/activity/' + id,
+      method: "GET",
+      dataType: "json",
+      success : function (data) {
+        console.log(data.data);
+      }
+    })
+  },
+  /**
+ * 获取换从中的数据
+ * id 是想要获取的数据中的id 
+ * key 是想要获取的key
+ */
+  getCacheActDetail: function (target ,id, key) {
+    wx.getStorage({
+      key: key,
+      success: function (res) {
+        var data = res.data.data;
+        for (var i = 0; i < data.length; i++) {
+          if (data[i].id == id) {
+            target.setData({
+              act : data[i]
+            });
+            return ;
+          }
+        }
+      },
+      fail: function (res) {
+        console.log("get cache fail" + res);
+      }
+
     })
   }
 })

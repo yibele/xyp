@@ -6,8 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    avatarUrl : '',
-    nickName: '',
+    userInfo : '',
     act_img : [
       "http://172.19.208.253/act_1.jpg",
       "http://172.19.208.253/act_1.jpg"
@@ -21,11 +20,14 @@ Page({
   onLoad: function (options) {
     var _this = this;
     var app = getApp();
-    app.getUserInfo(function(data){
-      _this.setData({
-        avatarUrl:data.avatarUrl,
-        nickName : data.nickName
-      })
+    wx.getStorage({
+      key: 'userInfo',
+      success: function(res) {
+        _this.setData({
+          userInfo: res.data
+        })
+        console.log(res.data);
+      },
     })
   },
 

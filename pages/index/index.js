@@ -22,7 +22,7 @@ Page({
       'http://172.19.208.253/paidui1.jpg',
       'http://172.19.208.253/paidui2.jpg'
     ],
-    act : '',
+    actInfo: '',
     indicatorDots: true,
     autoplay: true,
     interval: 4000,
@@ -34,16 +34,48 @@ Page({
       url: '../detail/detail?id=' + id
     });
   }, onLoad: function () {
+    this.getActInfo();
+    var userInfo = wx.getStorageSync('userInfo');
+    console.log(userInfo);
+    var openId = wx.getStorageSync('openId');
+      wx.request({
+      url: 'http://localhost/api/user',
+      method:"POST",
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },  
+      data: {
+        nickName: userInfo.nickName,
+        avatarUrl : userInfo.avatarUrl,
+        city : userInfo.city,
+        country: userInfo.country,
+        gender : userInfo.gender,
+        language : userInfo.language,
+        province : userInfo.province,
+        openId: openId
+      },
+      success : function(res) {
+        console.log(res.data);
+      }
+    })
+  },
+
+  /**
+    *获取活动信息
+    */
+
+  getActInfo: function () {
     var that = this;
     wx.request({
       url: 'http://localhost/api/activity',
       method: "GET",
       dataType: "json",
       success: function (res) {
-        console.log(res.data);
+        //将得到的data缓存到storage中
+        app.setCache('actInfo',res.data);
         that.setData({
-          act: res.data
-        })
+          actInfo: res.data
+        });
       }
     })
   }
