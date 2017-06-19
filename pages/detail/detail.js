@@ -7,13 +7,14 @@ Page({
    */
   data: {
     act: '',
+    leftNum: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getCacheActDetail(this, options.id,'actInfo');
+    this.getActDetail(options.id);
   },
 
   /**
@@ -69,49 +70,70 @@ Page({
    * 转到报名详细页面
    */
   toApply: function (event) {
-    wx.navigateTo({
-      url: '/pages/apply/apply',
-    })
+    this.checkUser();
+
+
   }
   ,
 
   /**
    * 获取活动详细信息
    */
-  getActDetail : function (id) {
+  getActDetail: function (id) {
     var that = this;
     wx.request({
-      url: 'http://localhost/api/activity/' + id,
-      method: "GET",
-      dataType: "json",
-      success : function (data) {
-        console.log(data.data);
+      url: 'http://172.19.208.253:8080/api/activity/' + id,
+      success: function (data) {
+        that.setData({
+          act: data.data.data,
+          leftNum: data.data.data.act_user_need - data.data.data.act_enough_user
+        })
+        wx.setStorageSync('actDetail', data.data.data);
+      },
+      fail: function () {
+        console.log('fail');
       }
     })
   },
   /**
- * 获取换从中的数据
- * id 是想要获取的数据中的id 
- * key 是想要获取的key
- */
-  getCacheActDetail: function (target ,id, key) {
-    wx.getStorage({
-      key: key,
+   * 检查用户是否在数据库中
+   * 如果成功检索到，就返回
+   * 如果没有检索到，就添加到数据库中
+   */
+  checkUser: function () {
+    var userInfo = wx.getStorageSync('userInfo');
+    wx.request({
+      url: 'http://localhost/api/user/search/' + userInfo.nickName,
       success: function (res) {
-        var data = res.data.data;
-        for (var i = 0; i < data.length; i++) {
-          if (data[i].id == id) {
-            target.setData({
-              act : data[i]
-            });
-            return ;
-          }
+        if (res.statusCode != 200) {
+          wx.request({
+            url: 'http://localhost/api/user',
+            header: { "Content-Type": "application/x-www-form-urlencoded"},
+            method: "POST",            
+            data: {
+              nickName: userInfo.nickName,
+              openId: userInfo.openId,
+              avatarUrl: userInfo.avatarUrl,
+              city: userInfo.city,
+              country: userInfo.country,
+              gender: userInfo.gender,
+              province: userInfo.province
+            },
+            success: function (res) {
+              console.log('add user success');
+              wx.navigateTo({
+                url: '/pages/apply/apply',
+              })
+            }
+          })
         }
+        wx.navigateTo({
+          url: '/pages/apply/apply',
+        })
       },
-      fail: function (res) {
-        console.log("get cache fail" + res);
-      }
+      fail: function () {
 
+      }
     })
   }
 })

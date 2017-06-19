@@ -1,11 +1,10 @@
 //app.js
 App({
+  data: {
+
+  },
   onLaunch: function () {
-    //调用API从本地缓存中获取数据
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs);
-    this.getUserInfo();
+    this.getUser();
   },
   getUserInfo: function (cb) {
     var that = this
@@ -23,11 +22,15 @@ App({
   globalData: {
     userInfo: null
   },
+
+
+
   /**
    * 设置缓存信息
    * key 缓存的key
    * cache 需要缓存的data
    */
+
   setCache: function (key, cache) {
     var that = this;
     wx.setStorage({
@@ -54,39 +57,43 @@ App({
     })
   },
   /**
-   * 获取用户登录状态
-   * openId
-   * session_key
-   */
-  getUserLoginInfo: function (res) {
-    var that = this
-    if (res.code) {
-      wx.request({
-        url: "http://localhost/api/user/onLogin",
-        data: {
-          code: res.code
-        },
-        success: function (res, cb) {
-          var openId = res.data.openid;
-          var session_key = res.data.session_key;
-          wx.setStorageSync('openId', openId);
-          wx.setStorageSync('session_key', session_key);
+    * 获取用户数据
+    */
+  getUser: function () {
+    var that = this;
+    wx.login({
+      success: function (res) {
+        if (res.code) {
+          var code = res.code;
           wx.getUserInfo({
             success: function (res) {
-              that.globalData.userInfo = res.userInfo;
-              wx.setStorageSync('userInfo', res.userInfo);
-              typeof cb == "function" && cb(that.globalData.userInfo)
+              var userInfo = res.userInfo;
+              wx.request({
+                url: 'http://172.19.208.253:8080/api/user/onLogin',
+                data: {
+                  code: code
+                },
+                success: function (res) {
+                  userInfo.openId = res.data.openid;
+                  wx.getStorage({
+                    key: 'userInfo',
+                    success: function(res) {
+                      return 
+                    },
+                    fail : function () {
+                      console.log('set userInfo storage success');
+                      wx.setStorageSync('userInfo', userInfo);
+                    }
+                  })              
+                },
+                fail : function () {
+                  console.log('get userInfo fail');
+                }
+              })
             }
-          })
-
-        },
-        fail: function () {
-          console.log("request fail");
+          });
         }
-      })
-    } else {
-      console.log("获取用户登录状态失败" + res.errMsg);
-    }
+      }
+    })
   }
-
 })

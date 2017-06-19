@@ -28,6 +28,6 @@
     </view>
   </view>
   <view class="_bottom">
-  <button  type="primary" bindtap="toApply">马上报名</button>
+  <button  type="primary" bindtap="toApply" data-time="{{act.act_time}}">马上报名</button>
   </view>
 </view>

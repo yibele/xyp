@@ -9,7 +9,7 @@ Page({
     min: '00' + ':',
     s: '00',
     //不知道是bug还什么，传过来的时间需要时用时间戳的形式,new Date()无法使用
-    time: '1497524400000',
+    time: '',
     t: '00'
   },
 
@@ -17,9 +17,30 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var actDetail = wx.getStorageSync('actDetail');
+    var act_id = actDetail.id;
+    var userInfo = wx.getStorageSync('userInfo');
+    var nickName = userInfo.nickName;
+
+
+    wx.request({
+      url: 'http://localhost/api/user/userAddAct',
+      data: {
+        nickName : nickName,
+        actid : act_id
+      },
+      success: function (res) {
+       console.log(res);
+      }
+    })
+
     //设置结束时间 因为结束时间需要用到时间戳， 所以获取时间戳
+    var time = Date.parse(new Date(actDetail.act_time));
     var NowTime = Date.now();
-    var timestamp = this.data.time - NowTime;
+    console.log(time);
+    console.log(options);
+
+    var timestamp = time - NowTime;
 
     this.setData({
       t: timestamp
@@ -81,7 +102,7 @@ Page({
    */
   timer: function () {
     var t = this.data.t - 1000;
-    var h = Math.floor(t / 1000 / 60 / 60 % 24);
+    var h = Math.floor(t / 1000 / 60 / 60 / 24);
     var m = Math.floor(t / 1000 / 60 % 60);
     var second = Math.floor(t / 1000 % 60);
     this.setData({
@@ -95,9 +116,19 @@ Page({
    * 转到活动详情页面
    */
   toDetailPage: function (e) {
-    var id = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: '../detail/detail?id=' + id
-    });
+    var act = wx.getStorageSync('actDetail');
+    var act_id = act.id;
+    var userInfo = wx.getStorageSync('userInfo');
+    var user_id = userInfo.id;
+
+    wx.request({
+      url: 'http://localhost/api/user/'+user_id+'/'+act_id,
+      success: function(res) {
+        console.log
+        wx.navigateTo({
+          url: '../detail/detail?id=' + act_id
+        });
+      }
+    })
   }
 })
