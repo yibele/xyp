@@ -66,14 +66,19 @@ App({
         if (res.code) {
           var code = res.code;
           wx.getUserInfo({
-            success: function (res) {
+            success: function (res) {            
               var userInfo = res.userInfo;
+              console.log(userInfo);
+              wx.setStorageSync('userInfo', userInfo);
+              /**
               wx.request({
                 url: 'http://172.19.208.253:8080/api/user/onLogin',
                 data: {
                   code: code
                 },
                 success: function (res) {
+                  console.log(res)
+                  console.log('get openId ok')
                   userInfo.openId = res.data.openid;
                   wx.getStorage({
                     key: 'userInfo',
@@ -89,7 +94,7 @@ App({
                 fail : function () {
                   console.log('get userInfo fail');
                 }
-              })
+              })*/
             }
           });
         }
